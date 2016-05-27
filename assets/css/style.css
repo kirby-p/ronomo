@@ -5,6 +5,9 @@ button {
 	border-radius: 8px;
 }
 
+img.recipeImage {
+	width: 30%;
+}
 #buttonDiv {
 	float: left;
 	width: 60%;
@@ -19,6 +22,10 @@ button {
 
 #listPic {
 	width: 100%;
+}
+
+#getRecipe {
+	margin: 10px auto auto auto;
 }
 
 #textList {

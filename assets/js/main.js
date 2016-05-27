@@ -1,6 +1,7 @@
 $(document).ready(function() {
 
-	
+  var key = 'Oyq2k1Dyv3mshHMjzyNGgQ20SI3Kp1mPLFHjsn9eFLUfsEkAFx';
+
   var groupButtons = [
     "Dairy", "Meat", "Fruits", "Vegetables", "Grains"
   ];
@@ -26,6 +27,7 @@ $(document).ready(function() {
   ];
 
   var userList = [];
+  var listurl = "";
 
   for(i = 0; i < groupButtons.length; i++){
       var groupButton = $('<button>').text(groupButtons[i]).attr('id', groupButtons[i]).addClass('groupButton');
@@ -80,7 +82,6 @@ $(document).ready(function() {
         };
     }
 
-  });
 
   $('#ingredientButtons').on('click', '.ingredients', function() {
     var foodID = $(this).attr('id');
@@ -88,6 +89,44 @@ $(document).ready(function() {
     console.log(userList);
     $("#textList").append(foodID + "<br>");
   });
+});
+
+$("#getRecipe").on("click", function() { 
+
+    for(i = 0; i < userList.length; i++){
+      listurl += userList[i];
+      if(i < (userList.length - 1)){
+        listurl += ",";
+      };
+    };
+
+  console.log(listurl);
+
+
+  var output = $.ajax({
+      // url: 'https://spoonacular-recipe-food-nutrition-v1.p.mashape.com/recipes/extract?forceExtraction=false&url=http%3A%2F%2Fwww.melskitchencafe.com%2Fthe-best-fudgy-brownies%2F',
+    
+    url: 'https://spoonacular-recipe-food-nutrition-v1.p.mashape.com/recipes/findByIngredients?fillIngredients=true&ingredients=' + listurl + '&limitLicense=false&number=10&ranking=1', 
+    type: 'GET', 
+    data: {}, 
+    dataType: 'json',
+    success: function(data) {
+      for (var i = 0; i < data.length; i++){
+        console.log(data);
+        $("#output").append("<img src=\'" + data[i].image + "\'>");
+        $("img").addClass("recipeImage");
+        // "<img src=\'https://spoonacular.com/recipeImages/Brown-Butter-Apple-Crumble-534573.jpg\'>";   
+
+      }          
+         },
+
+     error: function(err) { alert(err); },
+     beforeSend: function(xhr) {
+     xhr.setRequestHeader("X-Mashape-Authorization", key); // Enter here your Mashape key
+     }
+    });
+  });
+
 
 
   $("div.blog-post").hover(
@@ -125,7 +164,5 @@ $(document).ready(function() {
     });
 
   });
-
-
-});
+  });
 
