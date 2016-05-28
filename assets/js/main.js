@@ -41,7 +41,7 @@ $(document).ready(function() {
         $("#ingredientButtons").empty();
 
         for(i = 0; i < dairyButtons.length; i++){
-          var dairyButton = $('<button>').text(dairyButtons[i]).attr('id', dairyButtons[i]).addClass('dairyButton').addClass('ingredients');
+          var dairyButton = $('<button>').text(dairyButtons[i]).attr('id', dairyButtons[i]).addClass('dairyButton ingredients');
           $('#ingredientButtons').append(dairyButton);
         };
     }
@@ -50,7 +50,7 @@ $(document).ready(function() {
         $("#ingredientButtons").empty();
 
         for(i = 0; i < meatButtons.length; i++){
-          var meatButton = $('<button>').text(meatButtons[i]).attr('id', meatButtons[i]).addClass('meatButton').addClass('ingredients');
+          var meatButton = $('<button>').text(meatButtons[i]).attr('id', meatButtons[i]).addClass('meatButton ingredients');
           $('#ingredientButtons').append(meatButton);
         };
     }
@@ -59,7 +59,7 @@ $(document).ready(function() {
         $("#ingredientButtons").empty();
 
         for(i = 0; i < fruitButtons.length; i++){
-          var fruitButton = $('<button>').text(fruitButtons[i]).attr('id', fruitButtons[i]).addClass('fruitButton').addClass('ingredients');
+          var fruitButton = $('<button>').text(fruitButtons[i]).attr('id', fruitButtons[i]).addClass('fruitButton ingredients');
           $('#ingredientButtons').append(fruitButton);
         };
     }
@@ -68,7 +68,7 @@ $(document).ready(function() {
         $("#ingredientButtons").empty();
 
         for(i = 0; i < veggieButtons.length; i++){
-          var veggieButton = $('<button>').text(veggieButtons[i]).attr('id', veggieButtons[i]).addClass('veggieButton').addClass('ingredients');
+          var veggieButton = $('<button>').text(veggieButtons[i]).attr('id', veggieButtons[i]).addClass('veggieButton ingredients');
           $('#ingredientButtons').append(veggieButton);
         };
     }
@@ -77,11 +77,12 @@ $(document).ready(function() {
         $("#ingredientButtons").empty();
 
         for(i = 0; i < grainButtons.length; i++){
-          var grainButton = $('<button>').text(grainButtons[i]).attr('id', grainButtons[i]).addClass('grainButton').addClass('ingredients');
+          var grainButton = $('<button>').text(grainButtons[i]).attr('id', grainButtons[i]).addClass('grainButton ingredients');
           $('#ingredientButtons').append(grainButton);
         };
     }
 
+});
 
   $('#ingredientButtons').on('click', '.ingredients', function() {
     var foodID = $(this).attr('id');
@@ -89,7 +90,6 @@ $(document).ready(function() {
     console.log(userList);
     $("#textList").append(foodID + "<br>");
   });
-});
 
 $("#getRecipe").on("click", function() { 
 
@@ -103,9 +103,7 @@ $("#getRecipe").on("click", function() {
   console.log(listurl);
 
 
-  var output = $.ajax({
-      // url: 'https://spoonacular-recipe-food-nutrition-v1.p.mashape.com/recipes/extract?forceExtraction=false&url=http%3A%2F%2Fwww.melskitchencafe.com%2Fthe-best-fudgy-brownies%2F',
-    
+  var output = $.ajax({    
     url: 'https://spoonacular-recipe-food-nutrition-v1.p.mashape.com/recipes/findByIngredients?fillIngredients=true&ingredients=' + listurl + '&limitLicense=false&number=10&ranking=1', 
     type: 'GET', 
     data: {}, 
@@ -115,7 +113,6 @@ $("#getRecipe").on("click", function() {
         console.log(data);
         $("#output").append("<img src=\'" + data[i].image + "\'>");
         $("img").addClass("recipeImage");
-        // "<img src=\'https://spoonacular.com/recipeImages/Brown-Butter-Apple-Crumble-534573.jpg\'>";   
 
       }          
          },
