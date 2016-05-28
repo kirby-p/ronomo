@@ -27,13 +27,12 @@ $(document).ready(function() {
   ];
 
   var userList = [];
-  var missingList = [];
   var listurl = "";
 
-  for(i = 0; i < groupButtons.length; i++){
-      var groupButton = $('<button>').text(groupButtons[i]).attr('id', groupButtons[i]).addClass('groupButton');
-      $('#groupButtons').append(groupButton);
-    };
+  // for(i = 0; i < groupButtons.length; i++){
+  //     var groupButton = $('<button>').text(groupButtons[i]).attr('id', groupButtons[i]).addClass('groupButton');
+  //     $('#groupButtons').append(groupButton);
+  //   };
 
   $('#groupButtons').on('click', '.groupButton', function() {
     var foodGroup = $(this).attr("id");
@@ -112,10 +111,13 @@ $("#getRecipe").on("click", function() {
     success: function(data) {
 
       for (var i = 0; i < data.length; i++){
-        console.log(data[i]);
-        console.log(data[i].usedIngredientCount);
-        $("#output").append("<div id='recipeComp" + i + "' class='recipeComp'></div>");
+        // console.log(data);
+        console.log(data[i].id);
+
+        $("#output").append("<div id='recipeComp" + i + "'></div>");
         $("#recipeComp" + i).append("<div class ='images' id='foodImage" + i + "'></div><div class='recipeData' id='recipeInfo" + i + "'></div>")
+        // $("#foodImage" + i).append("<img src=\'" + data[i].image + "\'>");
+        // $("img").addClass("recipeImage");
 
         var id = $.ajax({
           url: 'https://spoonacular-recipe-food-nutrition-v1.p.mashape.com/recipes/' + data[i].id + '/information',
@@ -124,24 +126,20 @@ $("#getRecipe").on("click", function() {
           dataType: 'json',
           async: false,
           success: function(info) {
-            for (t = 0; t < data[i].missedIngredients.length; t++){
-              missingList.push(data[i].missedIngredients[t].name);
-            };
+            console.log(info.id);
+            console.log(info.title);
+            console.log(info.sourceUrl);
 
-            $("#foodImage" + i).append("<img src=\'" + info.image + "\'>");
-            $("img").addClass("recipeImage");
-            $("#recipeInfo" + i).append("<h3>" + info.title + "</h3>");
-            $("#recipeInfo" + i).append("<h4>Ingredients Used: " + data[i].usedIngredientCount + "</h4>");
-            $("#recipeInfo" + i).append("<h4>Ingredients Needed: " + missingList.join() + "</h4");
-            $("#recipeInfo" + i).append("</h4><br>");
-            $("#recipeInfo" + i).append("<a href='" + info.sourceUrl + "'>Click here for the Recipe!</a>");
+              $("#foodImage" + i).append("<img src=\'" + info.image + "\'>");
+              $("img").addClass("recipeImage");
+              $("#recipeInfo" + i).append(info.title + '<br><a href="'+info.sourceUrl+'">Click here for the Recipe!</a>');
 
           },
           error: function(err) { 
             alert(err); 
           },
           beforeSend: function(xhr) {
-            xhr.setRequestHeader("X-Mashape-Authorization", key); // Enter here your Mashape key
+            xhr.setRequestHeader("X-Mashape-Authorization",key); // Enter here your Mashape key
           }
         });
       };          
@@ -157,28 +155,6 @@ $("#getRecipe").on("click", function() {
 });
 
 
-
-  $("div.blog-post").hover(
-    function() {
-        $(this).find("div.content-hide").slideToggle("fast");
-    },
-    function() {
-        $(this).find("div.content-hide").slideToggle("fast");
-    }
-  );
-
-  $('.flexslider').flexslider({
-		prevText: '',
-		nextText: ''
-	});
-
-  $('.testimonails-slider').flexslider({
-    animation: 'slide',
-    slideshowSpeed: 5000,
-    prevText: '',
-    nextText: '',
-    controlNav: false
-  });
 
   $(function(){
 
