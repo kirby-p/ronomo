@@ -109,20 +109,50 @@ $("#getRecipe").on("click", function() {
     data: {}, 
     dataType: 'json',
     success: function(data) {
+
       for (var i = 0; i < data.length; i++){
-        console.log(data);
-        $("#output").append("<img src=\'" + data[i].image + "\'>");
-        $("img").addClass("recipeImage");
+        // console.log(data);
+        console.log(data[i].id);
 
-      }          
-         },
+        $("#output").append("<div id='recipeComp" + i + "'></div>");
+        $("#recipeComp" + i).append("<div class ='images' id='foodImage" + i + "'></div><div class='recipeData' id='recipeInfo" + i + "'></div>")
+        // $("#foodImage" + i).append("<img src=\'" + data[i].image + "\'>");
+        // $("img").addClass("recipeImage");
 
-     error: function(err) { alert(err); },
-     beforeSend: function(xhr) {
-     xhr.setRequestHeader("X-Mashape-Authorization", key); // Enter here your Mashape key
-     }
-    });
+        var id = $.ajax({
+          url: 'https://spoonacular-recipe-food-nutrition-v1.p.mashape.com/recipes/' + data[i].id + '/information',
+          type: 'GET', // The HTTP Method, can be GET POST PUT DELETE etc
+          data: {}, // Additional parameters here
+          dataType: 'json',
+          success: function(info) {
+            console.log(info.id);
+            // console.log(id);
+            console.log(info.title);
+            console.log(info.sourceUrl);
+              // $('#output').append('<h3><br><img src="'+data.image+'"><br>'+data.title+'<br><a href="'+data.sourceUrl+'">Click here for the Recipe!</a></h3>');
+            $("#foodImage" + i).append("<img src=\'" + info.image + "\'>");
+            $("img").addClass("recipeImage");
+            
+            $("#recipeInfo" + i).append(info.title);
+          },
+          error: function(err) { 
+            alert(err); 
+          },
+          beforeSend: function(xhr) {
+            xhr.setRequestHeader("X-Mashape-Authorization",key); // Enter here your Mashape key
+          }
+        });
+      };          
+    },
+
+    error: function(err) {
+      alert(err); 
+    },
+    beforeSend: function(xhr) {
+      xhr.setRequestHeader("X-Mashape-Authorization", key); // Enter here your Mashape key
+    }
   });
+});
 
 
 

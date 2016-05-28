@@ -6,8 +6,26 @@ button {
 }
 
 img.recipeImage {
-	width: 30%;
+	width: 100%;
 }
+.images {
+	width: 40%;
+}
+
+.data {
+	width: 60%;
+}
+
+#recipeImages {
+	width: 40%;
+	float: left;
+}
+
+#recipeInfo {
+	width: 60%;
+	float: left;
+}
+
 #buttonDiv {
 	float: left;
 	width: 60%;
