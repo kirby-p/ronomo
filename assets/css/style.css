@@ -1,0 +1,54 @@
+button {
+	background-color: orange;
+	color: black;
+	font-size: 20px;
+	border-radius: 8px;
+}
+
+img.recipeImage {
+	width: 100%;
+}
+.images {
+	width: 40%;
+}
+
+.data {
+	width: 60%;
+}
+
+#recipeImages {
+	width: 40%;
+	float: left;
+}
+
+#recipeInfo {
+	width: 60%;
+	float: left;
+}
+
+#buttonDiv {
+	float: left;
+	width: 60%;
+/*	margin-top: 50px;*/
+}
+
+#listDiv {
+	position: relative;
+	float:left;
+	width: 40%;
+}
+
+#listPic {
+	width: 100%;
+}
+
+#getRecipe {
+	margin: 10px auto auto auto;
+}
+
+#textList {
+	position: absolute;
+	top: 100px;
+	left: 15px;
+	font-size: 17.4px;
+}
