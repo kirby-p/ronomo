@@ -124,16 +124,16 @@ $("#getRecipe").on("click", function() {
           type: 'GET', // The HTTP Method, can be GET POST PUT DELETE etc
           data: {}, // Additional parameters here
           dataType: 'json',
+          async: false,
           success: function(info) {
             console.log(info.id);
-            // console.log(id);
             console.log(info.title);
             console.log(info.sourceUrl);
-              // $('#output').append('<h3><br><img src="'+data.image+'"><br>'+data.title+'<br><a href="'+data.sourceUrl+'">Click here for the Recipe!</a></h3>');
-            $("#foodImage" + i).append("<img src=\'" + info.image + "\'>");
-            $("img").addClass("recipeImage");
-            
-            $("#recipeInfo" + i).append(info.title);
+
+              $("#foodImage" + i).append("<img src=\'" + info.image + "\'>");
+              $("img").addClass("recipeImage");
+              $("#recipeInfo" + i).append(info.title);
+
           },
           error: function(err) { 
             alert(err); 

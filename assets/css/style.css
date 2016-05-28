@@ -5,24 +5,27 @@ button {
 	border-radius: 8px;
 }
 
+.container {
+/*	width: 90%;
+*/}
 img.recipeImage {
 	width: 100%;
 }
+
 .images {
-	width: 40%;
-}
-
-.data {
-	width: 60%;
-}
-
-#recipeImages {
+	box-sizing: border-box;
+	border-style: double;
+	padding: 10px;
+	clear: both;
 	width: 40%;
 	float: left;
 }
 
-#recipeInfo {
+.recipeData {
+	box-sizing: border-box;
+	border-style: double;
 	width: 60%;
+	height: 100%;
 	float: left;
 }
 
